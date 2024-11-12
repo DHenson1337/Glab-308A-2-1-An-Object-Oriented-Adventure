@@ -38,8 +38,11 @@ adventurer.roll = roll;
 // adventurer.roll();
 // adventurer.roll(5);
 
-//Part 2 ================================================
+//=============================Part 2 ================================================
+
+//Creating character class
 class Character {
+  static Max_HEALTH = 100; //(Part 4)
   constructor(name) {
     this.name = name;
     this.health = 100;
@@ -66,8 +69,28 @@ Object.assign(Character.prototype, { roll });
 
 //Having adventurer inherient properties of character
 class Adventurer extends Character {
+  static ROLES = [
+    "Fighter",
+    "Healer",
+    "Wizard",
+    "Dancing Queen",
+    "Katie-Parry",
+    "Adam-Sandlurker",
+    "Chris-chofer",
+    "Ola-Deli",
+    "In da Hood",
+    "Hema-Globin",
+    "Nickle-less",
+    "Fatou-Facts",
+  ];
   constructor(name, role) {
     super(name);
+    //(Part 4) Checks if adventure role is valid
+    if (!Adventurer.ROLES.includes(role)) {
+      throw new Error(
+        `Class ${role} isn't available please try again tomorrow or choose from one of these ${Adventurer.ROLES}`
+      );
+    }
     //Adventurers have specialized roles.
     this.role = role;
     //Every adventurer starts with a bed and 50 gold coins.
@@ -128,7 +151,7 @@ class companion {
 
 //Recreating robin again with properties of adventurer
 //(name, role)
-robin = new Adventurer("Robin", "Isekai protaganist"); //Ngl, this explain alot about robin
+robin = new Adventurer("Robin", "In da Hood"); //Ngl, this explain alot about robin
 robin.inventory.push(
   "sword",
   "potion",
@@ -154,3 +177,9 @@ leo.setCompanion(frank); // Boooo!
 // frank.search();
 
 //=======================Part 4=================================
+//Add a static MAX_HEALTH property to the Character class, equal to 100.
+//Add a static ROLES array to the Adventurer class, with the values
+//“Fighter,” “Healer,” and “Wizard.” Feel free to add other roles, if you desire!
+//Add a check to the constructor of the Adventurer class that ensures the given role matches one of these values.
+
+//=========================Part 5 =================================
