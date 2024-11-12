@@ -30,6 +30,7 @@ adventurer.companion.companion = {
 function roll(mod = 0) {
   const result = Math.floor(Math.random() * 20) + 1 + mod;
   console.log(`${this.name} rolled a ${result}.`);
+  return result;
 }
 
 //adding roll function to adventurer
@@ -183,3 +184,57 @@ leo.setCompanion(frank); // Boooo!
 //Add a check to the constructor of the Adventurer class that ensures the given role matches one of these values.
 
 //=========================Part 5 =================================
+// I learned about factories, but didn't see anything for me to do here.
+
+//===============================Part 6 ===================================
+/* Accept an Adventurer as a parameter.
+Use the roll() functionality to create opposing rolls for each adventurer.
+Subtract 1 from the adventurer with the lower roll.
+Log the results of this “round” of the duel, including the rolls and current health values.
+Repeat this process until one of the two adventurers reaches 50 health.
+Log the winner of the duel: the adventurer still above 50 health. */
+
+//Creating a new adventurer for the fight
+phil = new Adventurer("FillUP", "Dancing Queen");
+phil.health = 75; // Sadly they have a curse on them.
+
+// console.log(phil);
+// console.log(robin);
+
+//The function for the duel
+function duel(adventure1, adventure2) {
+  console.log(`${adventure1.name} VS ${adventure2.name}`);
+  let round = 1;
+  while (adventure1.health >= 50 && adventure2.health >= 50) {
+    const dice1 = adventure1.roll(5); //They are cheating :)
+    const dice2 = adventure2.roll();
+    if (dice1 > dice2) {
+      adventure2.health -= 1;
+      console.log(`Round:${round} winner is ${adventure1.name} `);
+    } else {
+      adventure1.health -= 1;
+      console.log(`Round:${round} winner is ${adventure2.name}`);
+    }
+    console.log(
+      `Current standings are ${adventure1.name} health is:${adventure1.health}
+      ${adventure2.name} health is:${adventure2.health} `
+    );
+    console.log("---------------------------------------------------");
+    round++;
+  }
+  if (adventure1.health > 50) {
+    console.log(
+      `The winner of this duel is ${adventure1.name} who an amazing fight`
+    );
+  } else {
+    console.log(
+      `Sigh, I guess ${adventure2.name}is the winner... what a cheater!`
+    );
+  }
+}
+
+duel(robin, phil);
+// console.log(robin);
+// console.log(phil);
+
+// console.log(robin.health);
